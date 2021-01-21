@@ -16,6 +16,8 @@ L'argument -l vous permettra d'indiquer une ligne.
 
 L'argument -d vous permettra d'indiquer une destination.
 
+l'argument -f téléchargera un fichier texte avec les résultats de votre recherche
+
 L'argument next vous indiquera les prochains départ a la station voulue.
 
 L'argument time vous indiquera les prochains départ d'une station voulue vers la destination voulue.
