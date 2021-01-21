@@ -3,6 +3,7 @@ import argparse
 import sys
 import urllib.request
 import csv
+from time import *
 
     
 
@@ -43,7 +44,10 @@ def create_schema(cursor):
     "dest_arr_code"	INTEGER
     );""")
 
-def time_tram(database): # argument 'next' tram
+def temps_arrive(horaire):
+    return strftime('%M min %S sec', gmtime(horaire))
+
+def time_tram(database): # argument 'time' tram
     conn = sqlite3.connect(database)
     cursor = conn.cursor()
     cursor.execute("""
@@ -51,50 +55,55 @@ def time_tram(database): # argument 'next' tram
     WHERE stop_name = ? AND trip_headsign = ? AND route_short_name = ?
     """, (station, destination, ligne))
     for row in cursor:
-        print(f'prochain passage de la ligne {row[4]} passant à {row[3]}, allant vers {row[5]}, est prévu à {row[7]}')
+        print(f'Prochain passage de la ligne {row[4]} passant à {row[3]} vers {row[5]} départ dans : {temps_arrive(row[9])}')
     conn.commit()
     conn.close()
 
 def next_tram(database): # argument 'next' tram
+    liste_next = []
     conn = sqlite3.connect(database)
     cursor = conn.cursor()
     cursor.execute("""
     SELECT * FROM infoarret
-    WHERE stop_name = ? AND trip_headsign = ? AND route_short_name = ?
-    """, (station, destination, ligne))
+    WHERE stop_name = ?
+    """, (station, ))
     for row in cursor:
-        print(f'prochain passage de la ligne {row[4]} passant à {row[3]}, allant vers {row[5]}, est prévu à {row[7]}')
+        liste_next.append(f'Ligne {row[4]} vers {row [5]} départ dans : {temps_arrive(row[9])}')
+        print(f'Ligne {row[4]} vers {row [5]} départ dans : {temps_arrive(row[9])}')
+
+
     conn.commit()
     conn.close()
 
 
 
 parser = argparse.ArgumentParser("Script to interact with data from the TAM API")
-#parser.add_argument("db_path", help="path to sqlite database")
-#parser.add_argument("csv_path", help="path to csv file to load into the db")
 parser.add_argument("-l", "--ligne", type=str, help="entre une ligne de tram")
 parser.add_argument("-d", "--destination", type=str, help="entre une destination" )
 parser.add_argument("-s", "--station", type=str, help="entre une station" )
 parser.add_argument("-c", "--currentdb", type=str, help="Use exciting database")
 parser.add_argument("-time", "--time", action='store_true', help="time tram")
 parser.add_argument("-next", "--next", action='store_true', help="next tram")
+parser.add_argument("-f", "--fichier", action='store_true', help="créer un fichier" )
 
 args = parser.parse_args()
 station = args.station 
 destination = args.destination
 ligne = args.ligne
-print(args)
 
-# parser.add_argument()
+
+
+def generer_doc():
+
+    fichier = open('passages.txt', 'w', encoding='utf8')
+    fichier = fichier.writelines()
+    for lignes in fichier:
+        print(lignes)
 
 
 def main():
     conn = sqlite3.connect('tam2.db')
     c = conn.cursor()
-    #args = parser.parse_args()
-    # if not args.csv_path or not args.csv_path:
-    #     print("Error : missing command line arguments")
-    #     return 1
     if args.currentdb:
         remove_table(c)
         create_schema(c)
@@ -114,18 +123,17 @@ def main():
     if args.time:
         time_tram('tam2.db')
 
-    # if not conn:
-    #     print("Error : could not connect to database {}".format(basedb))
-    #     return 1
+    if args.next:
+        next_tram('tam2.db')
+
+    if args.fichier:
+        generer_doc()
+
 
     
 
     
 
-    #write changes to database
-
-
-
-
+    
 if __name__ == "__main__":
     sys.exit(main())
