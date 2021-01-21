@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.9.2" />
+<title>tam2 API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>tam2</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import sqlite3
+import argparse
+import sys
+import urllib.request
+#import csv
+from time import *
+
+&#34;&#34;&#34;Hi everyone, with this program you can know when come the
+ next tramway with your station &#34;&#34;&#34;
+
+    
+
+def clear_rows(cursor):
+    &#34;&#34;&#34; This function does : Delete table &#39;infoarret&#39; for refresh the
+    table, before update&#34;&#34;&#34;
+    cursor.execute(&#34;&#34;&#34;DELETE FROM infoarret&#34;&#34;&#34;)
+
+
+def insert_csv_row(csv_row, cursor):
+    &#34;&#34;&#34; This function insert values in table &#39;infoarret&#39; &#34;&#34;&#34;   
+    cursor.execute(&#34;&#34;&#34;INSERT INTO infoarret VALUES (?,?,?,?,?,?,?,?,?,?,?) &#34;&#34;&#34;,
+                   csv_row.strip().split(&#34;;&#34;))
+
+
+def load_csv(path, cursor):
+    &#34;&#34;&#34; This function load and read the csv file, and insert row in db file&#34;&#34;&#34;
+    with open(path, &#34;r&#34;) as f:
+        # ignore the header
+        f.readline()
+        line = f.readline()
+        # loop over the lines in the file
+        while line:
+            insert_csv_row(line, cursor)
+            line = f.readline()
+
+def remove_table(cursor):
+    &#34;&#34;&#34;This function remove table &#39;infoarret&#39; if exist,
+     for remove before update&#34;&#34;&#34;
+    cursor.execute(&#34;&#34;&#34;DROP TABLE IF EXISTS infoarret&#34;&#34;&#34;)
+
+def create_schema(cursor):
+    &#34;&#34;&#34; This function create table &#39;infoarret&#39; if not exist :
+    this table contains 11 columns (course, stop_code,stop_id,stop_name,
+     route_short_name, trip_headsign, direction_id, is_theorical,
+    departure_time, delay_sec, dest_arr_code) and determinate the type
+    &#34;&#34;&#34;
+    cursor.execute(&#34;&#34;&#34;CREATE TABLE IF NOT EXISTS &#34;infoarret&#34; (
+    &#34;course&#34;    INTEGER,
+    &#34;stop_code&#34; TEXT,
+    &#34;stop_id&#34;   INTEGER,
+    &#34;stop_name&#34; TEXT,
+    &#34;route_short_name&#34;  TEXT,
+    &#34;trip_headsign&#34;     TEXT,
+    &#34;direction_id&#34;      INTEGER,
+    &#34;is_theorical&#34; INTEGER,
+    &#34;departure_time&#34;    TEXT,
+    &#34;delay_sec&#34; INTEGER,
+    &#34;dest_arr_code&#34;     INTEGER
+    );&#34;&#34;&#34;)
+
+def temps_arrive(horaire):
+    &#34;&#34;&#34;This function return time (sec) to time (min,sec)&#34;&#34;&#34;
+    return strftime(&#39;%M min %S sec&#39;, gmtime(horaire))
+
+def time_tram(database, cursor):  # argument &#39;time&#39; tram
+    &#34;&#34;&#34; This function configure the argument &#39;time&#39;, this function request
+     the database for recuperate the line in the column 
+    (stop_name , trip_headsign and route_short_name) and return the request&#34;&#34;&#34;
+    cursor.execute(&#34;&#34;&#34;
+    SELECT * FROM infoarret
+    WHERE stop_name = ? AND trip_headsign = ? AND route_short_name = ?
+    &#34;&#34;&#34;, (args.station, args.destination, args.ligne))
+    for row in cursor:
+        print(f&#39;Prochain passage de la ligne {row[4]} passant à {row[3]} vers {row[5]} départ dans : {temps_arrive(row[9])}&#39;)
+
+def next_tram(database, cursor):  # argument &#39;next&#39; tram
+    &#34;&#34;&#34;The function configure the argument &#39;next&#39; this function request the
+    database for recuperate line in the column stop_name,delay_sec and
+    route_short_name.
+    Then it returns the next passes in min,sec, the line and the direction. &#34;&#34;&#34;
+    cursor.execute(&#34;&#34;&#34;
+    SELECT * FROM infoarret
+    WHERE stop_name = ?
+    &#34;&#34;&#34;, (args.station, ))
+    for row in cursor:
+        print(f&#39;Ligne {row[4]} vers {row [5]} départ dans : {temps_arrive(row[9])}&#39;)
+
+
+def update_db():
+    &#34;&#34;&#34;This function, retrieve the csv from url and download this csv file&#34;&#34;&#34;
+    csv_url = &#39;https://data.montpellier3m.fr/sites/default/files/ressources/TAM_MMM_TpsReel.csv&#39;
+    urllib.request.urlretrieve(csv_url, &#39;tam.csv&#39;)
+
+parser = argparse.ArgumentParser(&#34;Script to interact with data from the TAM API&#34;)
+parser.add_argument(&#34;-l&#34;, &#34;--ligne&#34;, type=str, help=&#34;entre une ligne de tram&#34;)
+parser.add_argument(&#34;-d&#34;, &#34;--destination&#34;, type=str, help=&#34;entre une destination&#34; )
+parser.add_argument(&#34;-s&#34;, &#34;--station&#34;, type=str, help=&#34;entre une station&#34; )
+parser.add_argument(&#34;-c&#34;, &#34;--currentdb&#34;, type=str, help=&#34;Use exciting database&#34;)
+parser.add_argument(&#34;action&#34;, help=&#34;next tram or time tram&#34;)
+parser.add_argument(&#34;-f&#34;, &#34;--fichier&#34;, action=&#39;store_true&#39;, help=&#34;créer un fichier&#34; )
+
+#args = parser.parse_args()
+
+
+
+def generer_doc():
+    &#34;&#34;&#34;This function configure the argument -f. This argument create a text file
+    with the result&#34;&#34;&#34;
+
+    fichier = open(&#39;passages.txt&#39;, &#39;w&#39;, encoding=&#39;utf8&#39;)
+    fichier = fichier.writelines()
+    for lignes in fichier:
+        print(lignes)
+
+
+def main():
+    &#34;&#34;&#34; This function, is the MAIN function : 
+    This function will check if the argument next or time has been entered by the
+    user:
+
+   If one of the two arguments was entered the program will continue and display
+   the results to the user.
+
+    If neither of the two arguments was entered by the user the program will
+    display an error message and close.&#34;&#34;&#34;
+    if not args.action:
+        print(&#34;Error : il manque un argument action (&#39;time&#39; ou &#39;next&#39;)&#34;)
+        return 1
+    if args.action == &#39;time&#39;: 
+        if not args.station or not args.ligne or not args.destination: 
+            print(&#34;Error: il manque la ligne et/ou la station et/ou la destination dans les arguments&#34;)
+            return 1
+    if args.action == &#39;next&#39;:
+        if not args.station: 
+            print(&#34;Error: il manque la station dans les arguments&#34;)
+            return 1
+
+    conn = sqlite3.connect(&#39;tam.db&#39;)
+
+    if not conn: # si format ne convient pas, si la base est corrompue...etc
+        print(&#34;Error : could not connect to database &#34;)
+        return 1
+
+    c = conn.cursor()
+    remove_table(c)
+    if args.currentdb:
+        create_schema(c)
+        load_csv(args.currentdb, c)
+    else:
+        update_db()
+        dl = &#39;tam.csv&#39;
+        remove_table(c)
+        create_schema(c)
+        load_csv(dl, c)
+    if args.action == &#39;time&#39;:
+        time_tram(&#39;tam.db&#39;, c)
+    elif args.action == &#39;next&#39;:
+        next_tram(&#39;tam.db&#39;, c)
+    conn.commit()
+    conn.close()
+
+    
+
+    
+
+    
+if __name__ == &#34;__main__&#34;:
+  sys.exit(main())</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="tam2.clear_rows"><code class="name flex">
+<span>def <span class="ident">clear_rows</span></span>(<span>cursor)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function does : Delete table 'infoarret' for refresh the
+table, before update</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def clear_rows(cursor):
+    &#34;&#34;&#34; This function does : Delete table &#39;infoarret&#39; for refresh the
+    table, before update&#34;&#34;&#34;
+    cursor.execute(&#34;&#34;&#34;DELETE FROM infoarret&#34;&#34;&#34;)</code></pre>
+</details>
+</dd>
+<dt id="tam2.create_schema"><code class="name flex">
+<span>def <span class="ident">create_schema</span></span>(<span>cursor)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function create table 'infoarret' if not exist :
+this table contains 11 columns (course, stop_code,stop_id,stop_name,
+route_short_name, trip_headsign, direction_id, is_theorical,
+departure_time, delay_sec, dest_arr_code) and determinate the type</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def create_schema(cursor):
+    &#34;&#34;&#34; This function create table &#39;infoarret&#39; if not exist :
+    this table contains 11 columns (course, stop_code,stop_id,stop_name,
+     route_short_name, trip_headsign, direction_id, is_theorical,
+    departure_time, delay_sec, dest_arr_code) and determinate the type
+    &#34;&#34;&#34;
+    cursor.execute(&#34;&#34;&#34;CREATE TABLE IF NOT EXISTS &#34;infoarret&#34; (
+    &#34;course&#34;    INTEGER,
+    &#34;stop_code&#34; TEXT,
+    &#34;stop_id&#34;   INTEGER,
+    &#34;stop_name&#34; TEXT,
+    &#34;route_short_name&#34;  TEXT,
+    &#34;trip_headsign&#34;     TEXT,
+    &#34;direction_id&#34;      INTEGER,
+    &#34;is_theorical&#34; INTEGER,
+    &#34;departure_time&#34;    TEXT,
+    &#34;delay_sec&#34; INTEGER,
+    &#34;dest_arr_code&#34;     INTEGER
+    );&#34;&#34;&#34;)</code></pre>
+</details>
+</dd>
+<dt id="tam2.generer_doc"><code class="name flex">
+<span>def <span class="ident">generer_doc</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function configure the argument -f. This argument create a text file
+with the result</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def generer_doc():
+    &#34;&#34;&#34;This function configure the argument -f. This argument create a text file
+    with the result&#34;&#34;&#34;
+
+    fichier = open(&#39;passages.txt&#39;, &#39;w&#39;, encoding=&#39;utf8&#39;)
+    fichier = fichier.writelines()
+    for lignes in fichier:
+        print(lignes)</code></pre>
+</details>
+</dd>
+<dt id="tam2.insert_csv_row"><code class="name flex">
+<span>def <span class="ident">insert_csv_row</span></span>(<span>csv_row, cursor)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function insert values in table 'infoarret'</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def insert_csv_row(csv_row, cursor):
+    &#34;&#34;&#34; This function insert values in table &#39;infoarret&#39; &#34;&#34;&#34;   
+    cursor.execute(&#34;&#34;&#34;INSERT INTO infoarret VALUES (?,?,?,?,?,?,?,?,?,?,?) &#34;&#34;&#34;,
+                   csv_row.strip().split(&#34;;&#34;))</code></pre>
+</details>
+</dd>
+<dt id="tam2.load_csv"><code class="name flex">
+<span>def <span class="ident">load_csv</span></span>(<span>path, cursor)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function load and read the csv file, and insert row in db file</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_csv(path, cursor):
+    &#34;&#34;&#34; This function load and read the csv file, and insert row in db file&#34;&#34;&#34;
+    with open(path, &#34;r&#34;) as f:
+        # ignore the header
+        f.readline()
+        line = f.readline()
+        # loop over the lines in the file
+        while line:
+            insert_csv_row(line, cursor)
+            line = f.readline()</code></pre>
+</details>
+</dd>
+<dt id="tam2.main"><code class="name flex">
+<span>def <span class="ident">main</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function, is the MAIN function :
+This function will check if the argument next or time has been entered by the
+user:</p>
+<p>If one of the two arguments was entered the program will continue and display
+the results to the user.</p>
+<p>If neither of the two arguments was entered by the user the program will
+display an error message and close.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def main():
+    &#34;&#34;&#34; This function, is the MAIN function : 
+    This function will check if the argument next or time has been entered by the
+    user:
+
+   If one of the two arguments was entered the program will continue and display
+   the results to the user.
+
+    If neither of the two arguments was entered by the user the program will
+    display an error message and close.&#34;&#34;&#34;
+    if not args.action:
+        print(&#34;Error : il manque un argument action (&#39;time&#39; ou &#39;next&#39;)&#34;)
+        return 1
+    if args.action == &#39;time&#39;: 
+        if not args.station or not args.ligne or not args.destination: 
+            print(&#34;Error: il manque la ligne et/ou la station et/ou la destination dans les arguments&#34;)
+            return 1
+    if args.action == &#39;next&#39;:
+        if not args.station: 
+            print(&#34;Error: il manque la station dans les arguments&#34;)
+            return 1
+
+    conn = sqlite3.connect(&#39;tam.db&#39;)
+
+    if not conn: # si format ne convient pas, si la base est corrompue...etc
+        print(&#34;Error : could not connect to database &#34;)
+        return 1
+
+    c = conn.cursor()
+    remove_table(c)
+    if args.currentdb:
+        create_schema(c)
+        load_csv(args.currentdb, c)
+    else:
+        update_db()
+        dl = &#39;tam.csv&#39;
+        remove_table(c)
+        create_schema(c)
+        load_csv(dl, c)
+    if args.action == &#39;time&#39;:
+        time_tram(&#39;tam.db&#39;, c)
+    elif args.action == &#39;next&#39;:
+        next_tram(&#39;tam.db&#39;, c)
+    conn.commit()
+    conn.close()</code></pre>
+</details>
+</dd>
+<dt id="tam2.next_tram"><code class="name flex">
+<span>def <span class="ident">next_tram</span></span>(<span>database, cursor)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>The function configure the argument 'next' this function request the
+database for recuperate line in the column stop_name,delay_sec and
+route_short_name.
+Then it returns the next passes in min,sec, the line and the direction.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def next_tram(database, cursor):  # argument &#39;next&#39; tram
+    &#34;&#34;&#34;The function configure the argument &#39;next&#39; this function request the
+    database for recuperate line in the column stop_name,delay_sec and
+    route_short_name.
+    Then it returns the next passes in min,sec, the line and the direction. &#34;&#34;&#34;
+    cursor.execute(&#34;&#34;&#34;
+    SELECT * FROM infoarret
+    WHERE stop_name = ?
+    &#34;&#34;&#34;, (args.station, ))
+    for row in cursor:
+        print(f&#39;Ligne {row[4]} vers {row [5]} départ dans : {temps_arrive(row[9])}&#39;)</code></pre>
+</details>
+</dd>
+<dt id="tam2.remove_table"><code class="name flex">
+<span>def <span class="ident">remove_table</span></span>(<span>cursor)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function remove table 'infoarret' if exist,
+for remove before update</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def remove_table(cursor):
+    &#34;&#34;&#34;This function remove table &#39;infoarret&#39; if exist,
+     for remove before update&#34;&#34;&#34;
+    cursor.execute(&#34;&#34;&#34;DROP TABLE IF EXISTS infoarret&#34;&#34;&#34;)</code></pre>
+</details>
+</dd>
+<dt id="tam2.temps_arrive"><code class="name flex">
+<span>def <span class="ident">temps_arrive</span></span>(<span>horaire)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function return time (sec) to time (min,sec)</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def temps_arrive(horaire):
+    &#34;&#34;&#34;This function return time (sec) to time (min,sec)&#34;&#34;&#34;
+    return strftime(&#39;%M min %S sec&#39;, gmtime(horaire))</code></pre>
+</details>
+</dd>
+<dt id="tam2.time_tram"><code class="name flex">
+<span>def <span class="ident">time_tram</span></span>(<span>database, cursor)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function configure the argument 'time', this function request
+the database for recuperate the line in the column
+(stop_name , trip_headsign and route_short_name) and return the request</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def time_tram(database, cursor):  # argument &#39;time&#39; tram
+    &#34;&#34;&#34; This function configure the argument &#39;time&#39;, this function request
+     the database for recuperate the line in the column 
+    (stop_name , trip_headsign and route_short_name) and return the request&#34;&#34;&#34;
+    cursor.execute(&#34;&#34;&#34;
+    SELECT * FROM infoarret
+    WHERE stop_name = ? AND trip_headsign = ? AND route_short_name = ?
+    &#34;&#34;&#34;, (args.station, args.destination, args.ligne))
+    for row in cursor:
+        print(f&#39;Prochain passage de la ligne {row[4]} passant à {row[3]} vers {row[5]} départ dans : {temps_arrive(row[9])}&#39;)</code></pre>
+</details>
+</dd>
+<dt id="tam2.update_db"><code class="name flex">
+<span>def <span class="ident">update_db</span></span>(<span>)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This function, retrieve the csv from url and download this csv file</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_db():
+    &#34;&#34;&#34;This function, retrieve the csv from url and download this csv file&#34;&#34;&#34;
+    csv_url = &#39;https://data.montpellier3m.fr/sites/default/files/ressources/TAM_MMM_TpsReel.csv&#39;
+    urllib.request.urlretrieve(csv_url, &#39;tam.csv&#39;)</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="two-column">
+<li><code><a title="tam2.clear_rows" href="#tam2.clear_rows">clear_rows</a></code></li>
+<li><code><a title="tam2.create_schema" href="#tam2.create_schema">create_schema</a></code></li>
+<li><code><a title="tam2.generer_doc" href="#tam2.generer_doc">generer_doc</a></code></li>
+<li><code><a title="tam2.insert_csv_row" href="#tam2.insert_csv_row">insert_csv_row</a></code></li>
+<li><code><a title="tam2.load_csv" href="#tam2.load_csv">load_csv</a></code></li>
+<li><code><a title="tam2.main" href="#tam2.main">main</a></code></li>
+<li><code><a title="tam2.next_tram" href="#tam2.next_tram">next_tram</a></code></li>
+<li><code><a title="tam2.remove_table" href="#tam2.remove_table">remove_table</a></code></li>
+<li><code><a title="tam2.temps_arrive" href="#tam2.temps_arrive">temps_arrive</a></code></li>
+<li><code><a title="tam2.time_tram" href="#tam2.time_tram">time_tram</a></code></li>
+<li><code><a title="tam2.update_db" href="#tam2.update_db">update_db</a></code></li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc"><cite>pdoc</cite> 0.9.2</a>.</p>
+</footer>
+</body>
+</html>
