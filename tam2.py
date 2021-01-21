@@ -2,7 +2,7 @@ import sqlite3
 import argparse
 import sys
 import urllib.request
-import csv
+#import csv
 from time import *
 
     
@@ -27,7 +27,7 @@ def load_csv(path, cursor):
             line = f.readline()
 
 def remove_table(cursor):
-    cursor.execute("""DROP TABLE infoarret""")
+    cursor.execute("""DROP TABLE IF EXISTS infoarret""")
 
 def create_schema(cursor):
     cursor.execute("""CREATE TABLE IF NOT EXISTS "infoarret" (
@@ -47,49 +47,36 @@ def create_schema(cursor):
 def temps_arrive(horaire):
     return strftime('%M min %S sec', gmtime(horaire))
 
-def time_tram(database): # argument 'time' tram
-    conn = sqlite3.connect(database)
-    cursor = conn.cursor()
+def time_tram(database, cursor):  # argument 'time' tram
     cursor.execute("""
     SELECT * FROM infoarret
     WHERE stop_name = ? AND trip_headsign = ? AND route_short_name = ?
-    """, (station, destination, ligne))
+    """, (args.station, args.destination, args.ligne))
     for row in cursor:
         print(f'Prochain passage de la ligne {row[4]} passant à {row[3]} vers {row[5]} départ dans : {temps_arrive(row[9])}')
-    conn.commit()
-    conn.close()
 
-def next_tram(database): # argument 'next' tram
-    liste_next = []
-    conn = sqlite3.connect(database)
-    cursor = conn.cursor()
+def next_tram(database, cursor):  # argument 'next' tram
     cursor.execute("""
     SELECT * FROM infoarret
     WHERE stop_name = ?
-    """, (station, ))
+    """, (args.station, ))
     for row in cursor:
-        liste_next.append(f'Ligne {row[4]} vers {row [5]} départ dans : {temps_arrive(row[9])}')
         print(f'Ligne {row[4]} vers {row [5]} départ dans : {temps_arrive(row[9])}')
 
 
-    conn.commit()
-    conn.close()
-
-
+def update_db():
+    csv_url = 'https://data.montpellier3m.fr/sites/default/files/ressources/TAM_MMM_TpsReel.csv'
+    urllib.request.urlretrieve(csv_url, 'tam.csv')
 
 parser = argparse.ArgumentParser("Script to interact with data from the TAM API")
 parser.add_argument("-l", "--ligne", type=str, help="entre une ligne de tram")
 parser.add_argument("-d", "--destination", type=str, help="entre une destination" )
 parser.add_argument("-s", "--station", type=str, help="entre une station" )
 parser.add_argument("-c", "--currentdb", type=str, help="Use exciting database")
-parser.add_argument("-time", "--time", action='store_true', help="time tram")
-parser.add_argument("-next", "--next", action='store_true', help="next tram")
+parser.add_argument("action", help="next tram or time tram")
 parser.add_argument("-f", "--fichier", action='store_true', help="créer un fichier" )
 
 args = parser.parse_args()
-station = args.station 
-destination = args.destination
-ligne = args.ligne
 
 
 
@@ -102,33 +89,41 @@ def generer_doc():
 
 
 def main():
-    conn = sqlite3.connect('tam2.db')
+    if not args.action:
+        print("Error : il manque un argument action ('time' ou 'next')")
+        return 1
+    if args.action == 'time': 
+        if not args.station or not args.ligne or not args.destination: 
+            print("Error: il manque la ligne et/ou la station et/ou la destination dans les arguments")
+            return 1
+    if args.action == 'next':
+        if not args.station: 
+            print("Error: il manque la station dans les arguments")
+            return 1
+
+    conn = sqlite3.connect('tam.db')
+
+    if not conn: # si format ne convient pas, si la base est corrompue...etc
+        print("Error : could not connect to database ")
+        return 1
+
     c = conn.cursor()
+    remove_table(c)
     if args.currentdb:
-        remove_table(c)
         create_schema(c)
         load_csv(args.currentdb, c)
-        conn.commit()
-        conn.close()
     else:
-        csv_url = 'https://data.montpellier3m.fr/sites/default/files/ressources/TAM_MMM_TpsReel.csv'
-        dl_csv = urllib.request.urlretrieve(csv_url,'tam_test.csv')
-        dl = 'tam_test.csv'
+        update_db()
+        dl = 'tam.csv'
         remove_table(c)
         create_schema(c)
         load_csv(dl, c)
-        conn.commit()
-        conn.close()
-    
-    if args.time:
-        time_tram('tam2.db')
-
-    if args.next:
-        next_tram('tam2.db')
-
-    if args.fichier:
-        generer_doc()
-
+    if args.action == 'time':
+        time_tram('tam.db', c)
+    elif args.action == 'next':
+        next_tram('tam.db', c)
+    conn.commit()
+    conn.close()
 
     
 
