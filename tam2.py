@@ -155,7 +155,7 @@ parser.add_argument("-l", "--ligne", type=str, help="entre une ligne de tram")
 parser.add_argument("-d", "--destination", type=str, help="entre une destination" )
 parser.add_argument("-s", "--station", type=str, help="entre une station" )
 parser.add_argument("-c", "--currentdb", type=str, help="Use exciting database")
-parser.add_argument("action", help="next tram or time tram")
+parser.add_argument("action", nargs='?',help="next tram or time tram")
 parser.add_argument("-f", "--fichier", action='store_true', help="créer un fichier" )
 
 args = parser.parse_args()
