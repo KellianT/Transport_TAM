@@ -4,10 +4,19 @@ import sys
 import urllib.request
 from time import *
 
+import logging
 
+
+
+logging.basicConfig(
+    filename='tam.log',
+    level=logging.INFO,
+    format='%(asctime)s %(levelname)s - %(message)s',
+    datefmt='%d/%m/%Y %H:%M:%S',
+    )   
 
     
-
+logging.info('Demarrage du programe')
 def clear_rows(cursor):
     """ This function does : Delete lines in table 'infoarret' for refresh the
     the line in the column before update.
@@ -19,9 +28,11 @@ def clear_rows(cursor):
 
     """
     cursor.execute("""DELETE FROM infoarret""")
+    logging.info('clear_rows: Efface les lignes dans la table')
 
 
 def insert_csv_row(csv_row, cursor):
+   
     """ This function insert values in table 'infoarret' 
     
     cursor : It acts like a position indicator and will be mostly use to 
@@ -43,6 +54,8 @@ def load_csv(path, cursor):
     path : Source of the csv file.
 
     """
+    
+
     with open(path, "r") as f:
         # ignore the header
         f.readline()
@@ -51,6 +64,7 @@ def load_csv(path, cursor):
         while line:
             insert_csv_row(line, cursor)
             line = f.readline()
+    logging.info('load_csv: Charge la base de données')
 
 def remove_table(cursor):
     """This function remove table 'infoarret' if exist,
@@ -62,6 +76,8 @@ def remove_table(cursor):
     
     """
     cursor.execute("""DROP TABLE IF EXISTS infoarret""")
+    logging.info('remove_table: la table est supprime')
+
 
 def create_schema(cursor):
     """ This function create table 'infoarret' if not exist
@@ -85,9 +101,11 @@ def create_schema(cursor):
     "delay_sec"	INTEGER,
     "dest_arr_code"	INTEGER
     );""")
+    logging.info('create_schema: on cree les colonnes de la base')
 
 def temps_arrive(horaire):
     """This function return time (sec) to time (min,sec)"""
+    logging.info("temps_arrive: Conversion du temps d'attente")
     return strftime('%M min %S sec', gmtime(horaire))
 
 def time_tram(database, cursor):  # argument 'time' tram
@@ -114,6 +132,8 @@ def time_tram(database, cursor):  # argument 'time' tram
                 f.writelines(time_passage)
         else:
             print(f'Prochain passage de la ligne {row[4]} passant à {row[3]} vers {row[5]} départ dans : {temps_arrive(row[9])}')
+    logging.info("time_tram: Affichage de la demande de l'utilisateur(argument time) ")
+
 
 def next_tram(database, cursor):  # argument 'next' tram
     """The function configure the argument 'next'
@@ -141,7 +161,7 @@ def next_tram(database, cursor):  # argument 'next' tram
                 f.writelines(str(passage))
         else:        
             print(f'Ligne {row[4]} vers {row [5]} départ dans : {temps_arrive(row[9])}')
-
+    logging.info("next_tram: Affichage de la demande de l'utilisateur(argument next) ")
 
 def update_db():
     """This function, retrieve the csv from url and download this csv file
@@ -149,6 +169,7 @@ def update_db():
     """
     csv_url = 'https://data.montpellier3m.fr/sites/default/files/ressources/TAM_MMM_TpsReel.csv'
     urllib.request.urlretrieve(csv_url, 'tam.csv')
+    logging.info('update_db: Mise a jour de la base de données')
 
 parser = argparse.ArgumentParser("Script to interact with data from the TAM API")
 parser.add_argument("-l", "--ligne", type=str, help="entre une ligne de tram")
@@ -159,7 +180,7 @@ parser.add_argument("action", nargs='?',help="next tram or time tram")
 parser.add_argument("-f", "--fichier", action='store_true', help="créer un fichier" )
 
 args = parser.parse_args()
-
+logging.info('parser: creation des arguments ')
 
 
 def main():
@@ -173,22 +194,27 @@ def main():
     display an error message and close.
     
     """
+    logging.info('Demarrage de la fonction main')
     if not args.action:
         print("Error : il manque un argument action ('time' ou 'next')")
+        logging.warning('il manque un argument action') 
         return 1
     if args.action == 'time': 
         if not args.station or not args.ligne or not args.destination: 
             print("Error: il manque la ligne et/ou la station et/ou la destination dans les arguments")
+            logging.warning('il manque la ligne et/ou la station et/ou la destination dans les arguments')
             return 1
     if args.action == 'next':
         if not args.station: 
             print("Error: il manque la station dans les arguments")
+            logging.warning('il manque la station dans les arguments')
             return 1
 
     conn = sqlite3.connect('tam.db')
 
     if not conn: # si format ne convient pas, si la base est corrompue...etc
         print("Error : could not connect to database ")
+        logging.warning('impossible de se connecter à la base de données')
         return 1
 
     c = conn.cursor()
@@ -209,7 +235,7 @@ def main():
         
     conn.commit()
     conn.close()
-
+    logging.info('Programme fini !!!!!')
     
 
     
