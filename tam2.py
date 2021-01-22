@@ -17,7 +17,8 @@ logging.info('Demarrage du programe')
 
 
 def clear_rows(cursor):
-    """ This function does : Delete lines in table 'infoarret' for refresh the
+
+    """ This function does : Delete lines in table 'infoarret' for refresh
     the line in the column before update.
 
     cursor : Cursor is the bridge that connects Python and SQlite databases
@@ -26,6 +27,7 @@ def clear_rows(cursor):
     retrieve data.
 
     """
+
     cursor.execute("""DELETE FROM infoarret""")
     logging.info('clear_rows: Efface les lignes dans la table')
 
@@ -34,7 +36,7 @@ def insert_csv_row(csv_row, cursor):
 
     """ This function insert values in table 'infoarret'
 
-    cursor : It acts like a position indicator and will be mostly use to
+    cursor : Acts like a position indicator and will be use to
     retrieve data.
 
     csv_row : retrieve the lines on the csv file.
@@ -47,7 +49,7 @@ def insert_csv_row(csv_row, cursor):
 def load_csv(path, cursor):
     """ This function load and read the csv file, and insert row in db file.
 
-    cursor : It acts like a position indicator and will be mostly use to
+    cursor : Acts like a position indicator and will be use to
     retrieve data.
 
     path : Source of the csv file.
@@ -65,13 +67,15 @@ def load_csv(path, cursor):
 
 
 def remove_table(cursor):
-    """This function remove table 'infoarret' if exist,
+
+    """This function remove table 'infoarret' if exist
     for remove before update
 
-    cursor : It acts like a position indicator and will be mostly use to
+    cursor : Acts like a position indicator and will be use to
     retrieve data.
 
     """
+
     cursor.execute("""DROP TABLE IF EXISTS infoarret""")
     logging.info('remove_table: la table est supprime')
 
@@ -81,7 +85,7 @@ def create_schema(cursor):
 
     this table contains 11 columns and determinate the type.
 
-    cursor : It acts like a position indicator and will be mostly use to
+    cursor : Acts like a position indicator and will be use to
     retrieve data.
 
     """
@@ -102,24 +106,26 @@ def create_schema(cursor):
 
 
 def temps_arrive(horaire):
+
     """This function return time (sec) to time (min,sec)"""
+
     logging.info("temps_arrive: Conversion du temps d'attente")
     return strftime('%M min %S sec', gmtime(horaire))
 
 
-def time_tram(database, cursor):  # argument 'time' tram
-    """ This function configure the argument 'time'
-
-    this function request
-    the database for recuperate the line in the column
+def time_tram(database, cursor):
+    
+    """ This function configure the argument time
+    request the database for recuperate the line in the column
     (stop_name , trip_headsign and route_short_name) and return the request
 
-    cursor : It acts like a position indicator and will be mostly use to
+    cursor : Acts like a position indicator and will be use to
     retrieve data.
 
-    database : Search in the SQlite database
+    database : Search in the connected SQlite database
 
   """
+
     cursor.execute("""
     SELECT * FROM infoarret
     WHERE stop_name = ? AND trip_headsign = ? AND route_short_name = ?
@@ -134,20 +140,21 @@ def time_tram(database, cursor):  # argument 'time' tram
     logging.info("time_tram: Affichage de la demande de l'utilisateur(argument time) ")
 
 
-def next_tram(database, cursor):  # argument 'next' tram
-    """The function configure the argument 'next'
+def next_tram(database, cursor):
 
-    this function request the
-    database for recuperate line in the column stop_name,delay_sec and
-    route_short_name.
+    """The function configure the argument next
+
+    Request the database for recuperate line in the column stop_name
+    delay_sec and route_short_name.
     Then it returns the next passes in min,sec, the line and the direction.
-    cursor : It acts like a position indicator and will be mostly use to
+    cursor : Acts like a position indicator and will be use to
     retrieve data.
 
     database : Search in the SQlite database.
 
 
     """
+
     cursor.execute("""
     SELECT * FROM infoarret
     WHERE stop_name = ?
@@ -183,16 +190,18 @@ args = parser.parse_args()
 
 
 def main():
+
     """ This function, is the MAIN function :
     This function will check if the argument next or time has been entered by
     the user:
 
-   If one of the two arguments was entered the program will continue and
-   display the results to the user.
-   If neither of the two arguments was entered by the user the program will
+    If one of the two arguments was entered the program will continue and
+    display the results to the user.
+    If neither of the two arguments was entered by the user the program will
     display an error message and close.
 
     """
+
     logging.info('Demarrage de la fonction main')
     if not args.action:
         print("Error : il manque un argument action ('time' ou 'next')")
