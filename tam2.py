@@ -3,20 +3,19 @@ import argparse
 import sys
 import urllib.request
 from time import *
-
 import logging
-
 
 
 logging.basicConfig(
     filename='tam.log',
     level=logging.INFO,
     format='%(asctime)s %(levelname)s - %(message)s',
-    datefmt='%d/%m/%Y %H:%M:%S',
-    )   
+    datefmt='%d/%m/%Y %H:%M:%S',)
 
-    
+
 logging.info('Demarrage du programe')
+
+
 def clear_rows(cursor):
     """ This function does : Delete lines in table 'infoarret' for refresh the
     the line in the column before update.
@@ -32,10 +31,10 @@ def clear_rows(cursor):
 
 
 def insert_csv_row(csv_row, cursor):
-   
-    """ This function insert values in table 'infoarret' 
-    
-    cursor : It acts like a position indicator and will be mostly use to 
+
+    """ This function insert values in table 'infoarret'
+
+    cursor : It acts like a position indicator and will be mostly use to
     retrieve data.
 
     csv_row : retrieve the lines on the csv file.
@@ -54,8 +53,6 @@ def load_csv(path, cursor):
     path : Source of the csv file.
 
     """
-    
-
     with open(path, "r") as f:
         # ignore the header
         f.readline()
@@ -77,7 +74,6 @@ def remove_table(cursor):
     """
     cursor.execute("""DROP TABLE IF EXISTS infoarret""")
     logging.info('remove_table: la table est supprime')
-
 
 
 def create_schema(cursor):
@@ -138,7 +134,6 @@ def time_tram(database, cursor):  # argument 'time' tram
     logging.info("time_tram: Affichage de la demande de l'utilisateur(argument time) ")
 
 
-
 def next_tram(database, cursor):  # argument 'next' tram
     """The function configure the argument 'next'
 
@@ -165,6 +160,7 @@ def next_tram(database, cursor):  # argument 'next' tram
         else:
             print(f'Ligne {row[4]} vers {row [5]} départ dans : {temps_arrive(row[9])}')
     logging.info("next_tram: Affichage de la demande de l'utilisateur(argument next) ")
+
 
 def update_db():
     """This function, retrieve the csv from url and download this csv file
@@ -200,10 +196,10 @@ def main():
     logging.info('Demarrage de la fonction main')
     if not args.action:
         print("Error : il manque un argument action ('time' ou 'next')")
-        logging.warning('il manque un argument action') 
+        logging.warning('il manque un argument action')
         return 1
-    if args.action == 'time': 
-        if not args.station or not args.ligne or not args.destination: 
+    if args.action == 'time':
+        if not args.station or not args.ligne or not args.destination:
             print("Error: il manque la ligne et/ou la station et/ou la destination dans les arguments")
             logging.warning('il manque la ligne et/ou la station et/ou la destination dans les arguments')
             return 1
@@ -239,9 +235,7 @@ def main():
     conn.commit()
     conn.close()
     logging.info('Programme fini !!!!!')
-    
 
-    
 
 if __name__ == "__main__":
-  sys.exit(main())
+    sys.exit(main())
